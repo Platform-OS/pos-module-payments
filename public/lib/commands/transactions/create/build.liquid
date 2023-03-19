@@ -1,0 +1,6 @@
+{% liquid
+  assign origin_domain = context.location.host
+  assign data = null | hash_merge: payable_ids: object.payable_ids, amount_cents: object.amount_cents, currency: object.currency, gateway: object.gateway, c__status: 'new', origin_domain: origin_domain
+
+  return data
+%}

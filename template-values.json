@@ -1,8 +1,9 @@
 {
-  "name": "Module Name",
-  "machine_name": "module-name",
+  "name": "Payments",
+  "machine_name": "payments",
   "type": "module",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "dependencies": {
+    "core": "^1.0.0"
   }
 }

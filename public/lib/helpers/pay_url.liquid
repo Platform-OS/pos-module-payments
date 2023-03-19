@@ -1,0 +1,19 @@
+{% liquid
+  # Params:
+  #   geteway
+
+  assign gateway_is_configured_function = 'modules/' | append: gateway | append: '/helpers/is_configured'
+  function gateway_configured = gateway_is_configured_function
+  if gateway_configured
+    assign gateway_pay_url_function = 'modules/' | append: gateway | append: '/helpers/pay_url'
+    function url = gateway_pay_url_function
+  else
+    unless context.environment == 'production'
+      if use_fallback
+        function url = 'modules/payments/helpers/pay_url', gateway: use_fallback
+      endif
+    endunless
+  endif
+
+  return url
+%}

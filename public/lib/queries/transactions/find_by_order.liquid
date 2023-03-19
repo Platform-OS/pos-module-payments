@@ -1,0 +1,18 @@
+{% liquid
+  if order_ids == blank
+    log 'Something went wrong. order cannot be blank.', type: 'ERROR'
+    return null
+  endif
+
+  graphql r  = 'transactions/search_by_order', order_ids: order_ids, limit: 10
+  include 'lib/handle_graphql_response', r: r, name: 'queries/transactions/find_by_order'
+
+  assign transaction = r.transactions.results.first
+  for t in r.transactions.results
+    if t.status.name == 'app.statuses.transactions.success'
+      assign transaction = t
+      break
+    endif
+  endfor
+  return  transaction
+%}
