@@ -30,15 +30,16 @@ Defined events to which your application can listen:
 
 1. Create transaction `commands/transactions/create`. Read to gateway module docs to check if there are any required params that you have to pass to gateway, such as: buyer name, address, line items.
 
-        assign object = null | hash_merge: gateway: 'example', payable_ids: ["1", "2"], amount_cents: 1001, currency: 'USD'
-        function object = 'modules/payments/commands/transactions/create', object: object
-        echo object # => { "id": "5", gateway: "example", "status": { "name": "app.modules.payments.transactions.statuses.new" } }
 
-2. Generate url where you redirect the user
+        assign ids = '["1", "2"]' | parse_json
+        assign object = null | hash_merge: gateway: 'payments_example_gateway', payable_ids: ids, amount_cents: 1001, currency: 'USD'
+        function object = 'modules/payments/commands/transactions/create', object: object
+
+2. Generate url and redirect user to this url
         
-        function url = 'modules/payments/helpers/pay_url', transaction_id: "5"
-        
-3. Implement consumer that listen on the events:
+        function url = 'modules/payments/helpers/pay_url', transaction: object
+
+3. Implement consumer that listen on those events:
 - payments_transaction_succeeded
 - payments_transaction_failed
 
