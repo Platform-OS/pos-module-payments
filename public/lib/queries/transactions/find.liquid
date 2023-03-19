@@ -1,12 +1,10 @@
 {% liquid
   if id == blank
-    log 'Something went wrong. ID cannot be blank.', type: 'ERROR'
+    log 'Something went wrong. ID cannot be blank.', type: 'ERROR: modules/payments/queries/transactions/find'
     return null
   endif
 
-  graphql r  = 'transactions/search', id: id, limit: 1, with_profile: with_profile, with_order_details: with_order_details, with_gateway_requests: with_gateway_requests
-
-  include 'lib/handle_graphql_response', r: r, name: 'queries/transactions/find_by_profile'
+  graphql r  = 'modules/payments/transactions/search', id: id, limit: 1, with_gateway_requests: with_gateway_requests
 
   return r.transactions.results.first
 %}

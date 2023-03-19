@@ -1,7 +1,6 @@
 mutation create_transaction(
-  $profile_id: String!
-  $order_ids: [String]!
-  $amount: Int!
+  $payable_ids: [String]!
+  $amount_cents: Int!
   $currency: String!
   $gateway: String!
   $c__status: String!
@@ -9,11 +8,10 @@ mutation create_transaction(
 ) {
   record: record_create(
     record: {
-      table: "transaction"
+      table: "modules/payments/transaction"
       properties: [
-        { name: "profile_id" value: $profile_id }
-        { name: "order_ids" value_array: $order_ids }
-        { name: "amount" value_int: $amount }
+        { name: "payable_ids" value_array: $payable_ids }
+        { name: "amount_cents" value_int: $amount_cents }
         { name: "currency" value: $currency }
         { name: "gateway" value: $gateway }
         { name: "c__status" value: $c__status }
@@ -26,9 +24,8 @@ mutation create_transaction(
     created_at
     deleted_at
 
-    profile_id: property(name: "profile_id")
-    order_ids: property_array(name: "order_ids")
-    amount: property_int(name: "amount")
+    payable_ids: property_array(name: "payable_ids")
+    amount_cents: property_int(name: "amount_cents")
     currency: property(name: "currency")
     gateway: property(name: "gateway")
     c__status: property(name: "c__status")
