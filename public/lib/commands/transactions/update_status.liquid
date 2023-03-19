@@ -1,14 +1,16 @@
 {%  liquid
-  function object = 'lib/commands/transactions/update_status/build', object: object, transaction: transaction
-  function object = 'lib/commands/transactions/update_status/check', object: object
+  function object = 'modules/payments/commands/transactions/update_status/build', object: object, transaction: transaction
+  function object = 'modules/payments/commands/transactions/update_status/check', object: object
 
   if object.valid
     if object.name == 'app.statuses.transactions.success'
-      function _event = 'lib/commands/events/create', type: 'transaction_succeeded', actor_id: transaction.profile_id, target_id: object.id, object_id: object.id
+      assign event_payload = null | hash_merge: transaction_id: transaction.id
+      function _ = 'modules/core/commands/events/publish', type: 'payments_transaction_succeeded', object: event_payload
     endif
-    function status = 'lib/commands/statuses/create', object_id: object.id, name: object.name, profile_id: transaction.profile_id
-    function _event = 'lib/commands/events/create', type: 'status_created', actor_id: transaction.profile_id, object_id: status.id, target_id: status.object_id
-    hash_assign object['status'] = status
+    # TODO: extract statuses? what we should do with status.profile_id
+    # function status = 'lib/commands/statuses/create', object_id: object.id, name: object.name, profile_id: transaction.profile_id
+    # function _event = 'lib/commands/events/create', type: 'status_created', actor_id: transaction.profile_id, object_id: status.id, target_id: status.object_id
+    # hash_assign object['status'] = status
   endif
 
   return object
