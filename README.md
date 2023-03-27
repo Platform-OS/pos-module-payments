@@ -47,6 +47,8 @@ Defined events to which your application can listen:
 - payments_transaction_succeeded
 - payments_transaction_failed
 
+Here are instructions how to write consumer https://github.com/Platform-OS/pos-module-core#handling-events
+
 ## Versioning
 
 ```
