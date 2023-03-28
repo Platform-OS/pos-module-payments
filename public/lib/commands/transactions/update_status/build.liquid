@@ -7,14 +7,7 @@
   else
     assign status = 'app.statuses.transactions.failed'
   endcase
-%}
-{% parse_json object %}
-  {
-    "id": {{ transaction.id | json }},
-    "name": {{ status | json }}
-  }
-{% endparse_json %}
 
-{% liquid
-  return object
+  assign data = null | hash_merge: id: transaction.id, name: status
+  return data
 %}
