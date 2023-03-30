@@ -41,7 +41,9 @@ Defined events to which your application can listen:
 
 2. Generate url and redirect user to this url
         
-        function url = 'modules/payments/helpers/pay_url', transaction: object
+        assign gateway_params = null | hash_merge: success_url: 'https://youpage.com/successinfo'
+        function url = 'modules/payments/helpers/pay_url', transaction: object, gateway_params: gateway_params
+        redirect_to url, status: 303
 
 3. Implement consumer that listen on those events:
 - payments_transaction_succeeded
