@@ -1,16 +1,11 @@
-{% parse_json object_build %}
-  {
-    "gateway": {{ gateway | json }},
-    "external_id": {{ external_id | json }},
-    "api_call_name": {{ object.name | json }},
-    "template": {{ object.template | json }}
-  }
-{% endparse_json %}
-
 {% liquid
-  assign payload = object.data | json
-  hash_assign object_build['payload'] = payload
-  hash_assign object_build['data'] = object.data
+  assign request_data = object | json
+  assign url = object.to
 
-  return object_build
+  assign gateway_request = null | hash_merge: external_id: external_id, name: name, request_url: url, request_data: request_data, api_call_template: template
+  assign api_call = null | hash_merge: template: template, data: object
+
+  assign data = null | hash_merge: api_call: api_call, gateway_request: gateway_request
+
+  return data
 %}

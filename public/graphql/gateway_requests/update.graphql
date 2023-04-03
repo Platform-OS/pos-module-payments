@@ -1,14 +1,14 @@
 mutation update_gateway_request(
   $id: ID!
-  $response: String
+  $response_body: String
   $response_status: String
 ) {
   record: record_update(
     id: $id
     record: {
-      table: "gateway_request"
+      table: "modules/payments/gateway_request"
       properties: [
-        { name: "response" value: $response }
+        { name: "response_body" value: $response_body }
         { name: "response_status" value: $response_status }
       ]
     }
@@ -16,11 +16,10 @@ mutation update_gateway_request(
     id
     created_at
     updated_at
-      gateway: property(name: "gateway")
       external_id: property(name: "external_id")
-      payload: property(name: "payload")
-      response: property(name: "response")
+      request_data: property(name: "request_data")
+      response_body: property(name: "response_body")
       response_status: property(name: "response_status")
-      api_call_name: property(name: "api_call_name")
+      api_call_template: property(name: "api_call_template")
     }
 }

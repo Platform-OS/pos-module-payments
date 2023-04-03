@@ -1,8 +1,9 @@
 name: gateway_request
 properties:
-  - name: gateway
+  - name: name
   - name: external_id
-  - name: payload
-  - name: response
+  - name: request_data
+  - name: request_url
+  - name: response_body
   - name: response_status
-  - name: api_call_name
+  - name: api_call_template
