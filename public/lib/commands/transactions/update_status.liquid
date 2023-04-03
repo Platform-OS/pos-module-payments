@@ -7,10 +7,6 @@
       assign event_payload = null | hash_merge: transaction_id: transaction.id
       function _ = 'modules/core/commands/events/publish', type: 'payments_transaction_succeeded', object: event_payload
     endif
-    # TODO: extract statuses? what we should do with status.profile_id
-    # function status = 'lib/commands/statuses/create', object_id: object.id, name: object.name, profile_id: transaction.profile_id
-    # function _event = 'lib/commands/events/create', type: 'status_created', actor_id: transaction.profile_id, object_id: status.id, target_id: status.object_id
-    # hash_assign object['status'] = status
   endif
 
   return object
