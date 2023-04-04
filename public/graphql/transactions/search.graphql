@@ -8,6 +8,7 @@ query search(
   $gateway: String
   $c__status: String
   $with_gateway_requests: Boolean = false
+  $with_statuses: Boolean = false
 ) {
   transactions: records(
     per_page: $limit
@@ -16,23 +17,25 @@ query search(
       id: { value: $id }
       table: { value: "modules/payments/transaction" }
       properties: [
-        { name: "payable_ids" array_contains: $payable_ids }
-        { name: "amount_cents" value: $amount_cents }
-        { name: "currency" value: $currency }
-        { name: "gateway" value: $gateway }
-        { name: "c__status" value: $c__status }
+        { name: "payable_ids", array_contains: $payable_ids }
+        { name: "amount_cents", value: $amount_cents }
+        { name: "currency", value: $currency }
+        { name: "gateway", value: $gateway }
+        { name: "c__status", value: $c__status }
       ]
     }
-    sort: [
-      { created_at: { order: DESC }}
-    ]
-  ){
+    sort: [{ created_at: { order: DESC } }]
+  ) {
     total_entries
+    has_next_page
+    has_previous_page
+    current_page
+
     results {
       id
       created_at
       type: table
-      profile_id: property(name: "profile_id")
+
       payable_ids: property_array(name: "payable_ids")
       amount_cents: property_int(name: "amount_cents")
       currency: property(name: "currency")
@@ -42,28 +45,36 @@ query search(
       gateway_requests: related_records(
         join_on_property: "id"
         foreign_property: "external_id"
-        table: "gateway_request"
+        table: "modules/payments/gateway_request"
         sort: { created_at: { order: DESC } }
       ) @include(if: $with_gateway_requests) {
         id
+        type: table
         created_at
-        payload: property(name: "payload")
-        response: property(name: "response")
-        api_call_name: property(name: "api_call_name")
-        gateway: property(name: "gateway")
+
+        external_id: property(name: "external_id")
+        request_url: property(name: "request_url")
+        request_data: property(name: "request_data")
+        name: property(name: "name")
+        api_call_template: property(name: "api_call_template")
       }
 
-      status: related_record(
+      statuses: related_records(
         join_on_property: "id"
-        foreign_property: "object_id"
-        table: "status"
+        foreign_property: "reference_id"
+        table: "modules/core/status"
         sort: { properties: { name: "name", order: ASC } }
-      ) {
+      ) @include(if: $with_statuses) {
         id
         type: table
         created_at
+
         name: property(name: "name")
         timestamp: property(name: "timestamp")
+        reference_id: property(name: "reference_id")
+        reference_schema: property(name: "reference_schema")
+        payload: property(name: "payload")
+        requester_id: property(name: "requester_id")
       }
     }
   }

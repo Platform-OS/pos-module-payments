@@ -1,6 +1,24 @@
+{% comment %}
+  SEarches for transctions.
+
+  Params:
+    - limit Int
+      default: 20
+    - page: Int
+      default: 1
+    - payable_ids: [String!]
+    - amount_cents: String
+    - currency: String
+    - gateway: String
+    - c__status: String
+    - with_gateway_requests: Boolean = false
+    - with_statuses: Boolean = false
+{% endcomment %}
 {% liquid
-  graphql r = 'transactions/search', limit: limit, page: page, with_gateway_requests: with_gateway_requests, with_any_gateway_respones: with_any_gateway_respones, with_order_details: with_order_details, with_profile: with_profile
-  include 'lib/handle_graphql_response', r: r, name: 'queries/transactions/search'
+  assign page = page | to_positive_integer: 1
+  assign limit = limit | default: 20
+
+  graphql r = 'modules/payments/transactions/search', limit: limit, page: page, payable_ids: payable_ids, amount_cents: amount_cents, currency: currency, gateway: gateway, with_gateway_requests: with_gateway_requests, with_statuses: with_statuses
 
   return r.transactions
 %}
