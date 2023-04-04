@@ -1,7 +1,7 @@
 {% parse_json object %}
   {
     "id": {{ gateway_request.id | json }},
-    "response": {{ object.response.body | json }},
+    "response_body": {{ object.response.body | json }},
     "response_status": "{{ object.response.status }}"
   }
 {% endparse_json %}
