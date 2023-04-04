@@ -45,7 +45,7 @@ query search(
       gateway_requests: related_records(
         join_on_property: "id"
         foreign_property: "external_id"
-        table: "modyles/payments/gateway_request"
+        table: "modules/payments/gateway_request"
         sort: { created_at: { order: DESC } }
       ) @include(if: $with_gateway_requests) {
         id
