@@ -17,7 +17,8 @@ Payment gateway should:
 - implement `pay_url` function that returns url where we redirect user to pay.
 - implement `modules/<gateway>/commands/statuses/get`
 - fire `modules/payments/commands/transactions/udpate_status` function once the payment status changes.
-- fire `modules/payments/commands/gateway_requests/store_request` once communication with their external api happens.
+- fire `modules/payments/commands/gateway_requests/send` once communication with their external api happens.
+- fire `modules/payments/commands/gateway_requests/receive` once we get the webhook notification.
 - any necessary page for gateway should be implemented in this namespace `/payments/<gateway_name>/*`
 
 ## Usage
