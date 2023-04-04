@@ -3,7 +3,7 @@ mutation create_gateway_request(
   $request_url: String!
   $request_data: String!
   $name: String!
-  $api_call_template: String!
+  $api_call_template: String
 ) {
   record: record_create(
     record: {
