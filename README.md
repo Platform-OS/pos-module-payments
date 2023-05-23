@@ -16,7 +16,7 @@ This module delivers:
 Payment gateway should:
 - implement `pay_url` function that returns url where we redirect user to pay.
 - implement `modules/<gateway>/commands/statuses/get`
-- fire `modules/payments/commands/transactions/udpate_status` function once the payment status changes.
+- fire `modules/payments/commands/transactions/update_status` function once the payment status changes.
 - fire `modules/payments/commands/gateway_requests/send` once communication with their external api happens.
 - fire `modules/payments/commands/gateway_requests/receive` once we get the webhook notification.
 - any necessary page for gateway should be implemented in this namespace `/payments/<gateway_name>/*`
@@ -28,8 +28,10 @@ Include this module and one of the payment gateways. There is a example payment 
 ## Events
 
 Defined events to which your application can listen:
+- payments_transaction_pending
 - payments_transaction_succeeded
 - payments_transaction_failed
+- payments_transaction_expired
 
 ## Examples
 
@@ -41,7 +43,7 @@ Defined events to which your application can listen:
         function object = 'modules/payments/commands/transactions/create', object: object
 
 2. Generate url and redirect user to this url
-        
+
         assign gateway_params = null | hash_merge: success_url: 'https://youpage.com/successinfo'
         function url = 'modules/payments/helpers/pay_url', transaction: object, gateway_params: gateway_params
         redirect_to url, status: 303
@@ -49,6 +51,8 @@ Defined events to which your application can listen:
 3. Implement consumer that listen on those events:
 - payments_transaction_succeeded
 - payments_transaction_failed
+- payments_transaction_pending
+- payments_transaction_expired
 
 Here are instructions how to write consumer https://github.com/Platform-OS/pos-module-core#handling-events
 
