@@ -3,11 +3,10 @@
   function object = 'modules/payments/commands/transactions/update_status/check', object: object
 
   if object.valid
-    if object.name == 'app.statuses.transactions.success'
-      assign event_payload = null | hash_merge: transaction_id: transaction.id
-      function _ = 'modules/core/commands/events/publish', type: 'payments_transaction_succeeded', object: event_payload
-      function _ = 'modules/core/commands/statuses/create', name: object.name, reference_id: transaction.id, requester_id: requester_id, reference_schema: 'modules/payments/transaction', payload: request_payload
-    endif
+    assign event_payload = null | hash_merge: transaction_id: transaction.id
+    assign type = object.name | remove: 'app.statuses.' | prepend: 'payments_' | replace: '.', '_'
+    function _ = 'modules/core/commands/events/publish', type: type, object: event_payload
+    function _ = 'modules/core/commands/statuses/create', name: object.name, reference_id: transaction.id, requester_id: requester_id, reference_schema: 'modules/payments/transaction', payload: request_payload
   endif
 
   return object

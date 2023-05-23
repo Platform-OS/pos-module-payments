@@ -7,4 +7,9 @@ properties:
   - name: currency
   - name: gateway
   - name: c__status
+    # - app.statuses.transactions.new
+    # - app.statuses.transactions.pending
+    # - app.statuses.transactions.succeeded
+    # - app.statuses.transactions.expired
+    # - app.statuses.transactions.failed
   - name: origin_domain

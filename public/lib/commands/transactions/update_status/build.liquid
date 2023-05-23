@@ -1,7 +1,9 @@
 {% liquid
   case object.payment_status
+  when 'pending'
+    assign status = 'app.statuses.transactions.pending'
   when 'success'
-    assign status = 'app.statuses.transactions.success'
+    assign status = 'app.statuses.transactions.succeeded'
   when 'expired'
     assign status = 'app.statuses.transactions.expired'
   else
