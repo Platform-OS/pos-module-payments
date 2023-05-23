@@ -5,7 +5,7 @@
   if object.valid
     function object = 'modules/payments/commands/execute', mutation_name: 'modules/payments/transactions/create' object: object
   else
-    log object, type: "ERROR"
+    log object, type: "ERROR modules/payments/commands/transactions/create"
   endif
 
   return object
