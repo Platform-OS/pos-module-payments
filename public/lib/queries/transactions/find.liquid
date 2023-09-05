@@ -5,7 +5,7 @@
     - id
     - with_gateway_requests: Boolean = false
     - with_statuses: Boolean = false
-{% endcomment%}
+{% endcomment %}
 {% liquid
   if id == blank
     log 'Something went wrong. ID cannot be blank.', type: 'ERROR: modules/payments/queries/transactions/find'
