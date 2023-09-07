@@ -3,7 +3,7 @@
     return null
   endif
 
-  graphql r  = 'gateway_requests/search', id: id, limit: 1
+  graphql r  = 'modules/payments/gateway_requests/search', id: id, limit: 1
 
   return r.gateway_requests.results.first
 %}
