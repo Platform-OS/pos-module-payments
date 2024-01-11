@@ -41,6 +41,7 @@ query search(
       currency: property(name: "currency")
       gateway: property(name: "gateway")
       c__status: property(name: "c__status")
+      gateway_transaction_id: property(name: "gateway_transaction_id")
 
       gateway_requests: related_records(
         join_on_property: "id"
@@ -59,23 +60,36 @@ query search(
         api_call_template: property(name: "api_call_template")
       }
 
+      status: related_record(
+        join_on_property: "id"
+        foreign_property: "reference_id"
+        table: "modules/core/status"
+        sort: { created_at: { order: ASC } }
+      ) {
+        ...status
+      }
+
       statuses: related_records(
         join_on_property: "id"
         foreign_property: "reference_id"
         table: "modules/core/status"
-        sort: { properties: { name: "name", order: ASC } }
+        sort: { created_at: { order: ASC } }
       ) @include(if: $with_statuses) {
-        id
-        type: table
-        created_at
-
-        name: property(name: "name")
-        timestamp: property(name: "timestamp")
-        reference_id: property(name: "reference_id")
-        reference_schema: property(name: "reference_schema")
-        payload: property(name: "payload")
-        requester_id: property(name: "requester_id")
+        ...status
       }
     }
   }
+}
+
+fragment status on Record {
+  id
+  type: table
+  created_at
+
+  name: property(name: "name")
+  timestamp: property(name: "timestamp")
+  reference_id: property(name: "reference_id")
+  reference_schema: property(name: "reference_schema")
+  payload: property(name: "payload")
+  requester_id: property(name: "requester_id")
 }

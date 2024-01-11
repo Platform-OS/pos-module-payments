@@ -13,3 +13,6 @@ properties:
     # - app.statuses.transactions.expired
     # - app.statuses.transactions.failed
   - name: origin_domain
+
+  # id used by gateway provided api
+  - name: gateway_transaction_id
