@@ -7,11 +7,11 @@ properties:
   - name: currency
   - name: gateway
   - name: c__status
-    # - app.statuses.transactions.new
-    # - app.statuses.transactions.pending
-    # - app.statuses.transactions.succeeded
-    # - app.statuses.transactions.expired
-    # - app.statuses.transactions.failed
+    # - app.statuses.transactions.new - payment started
+    # - app.statuses.transactions.pending - payment is on way
+    # - app.statuses.transactions.succeeded - money received
+    # - app.statuses.transactions.expired - payment session expired no money received
+    # - app.statuses.transactions.failed - payment failed no money received
   - name: origin_domain
 
   # id used by gateway provided api

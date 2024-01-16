@@ -1,4 +1,5 @@
 {%  liquid
+  assign request_payload = request_payload | default: null
   function object = 'modules/payments/commands/transactions/update_status/build', object: object, transaction: transaction
   function object = 'modules/payments/commands/transactions/update_status/check', object: object
 
