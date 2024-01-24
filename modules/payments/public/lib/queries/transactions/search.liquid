@@ -8,6 +8,7 @@
       default: 1
     - payable_ids: [String!]
     - amount_cents: String
+    - user_id: String
     - currency: String
     - gateway: String
     - c__status: String
@@ -18,7 +19,7 @@
   assign page = page | to_positive_integer: 1
   assign limit = limit | default: 20
 
-  graphql r = 'modules/payments/transactions/search', limit: limit, page: page, payable_ids: payable_ids, amount_cents: amount_cents, currency: currency, gateway: gateway, with_gateway_requests: with_gateway_requests, with_statuses: with_statuses
+  graphql r = 'modules/payments/transactions/search', limit: limit, page: page, payable_ids: payable_ids, amount_cents: amount_cents, currency: currency, gateway: gateway, with_gateway_requests: with_gateway_requests, with_statuses: with_statuses, user_id: user_id
 
   return r.transactions
 %}
