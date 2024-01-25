@@ -5,7 +5,7 @@ query search(
   $payable_ids: [String!]
   $amount_cents: String
   $currency: String
-  $user_id: String
+  $payer_id: String
   $gateway: String
   $c__status: String
   $with_gateway_requests: Boolean = false
@@ -21,7 +21,7 @@ query search(
         { name: "payable_ids", array_contains: $payable_ids }
         { name: "amount_cents", value: $amount_cents }
         { name: "currency", value: $currency }
-        { name: "user_id", value: $user_id }
+        { name: "payer_id", value: $payer_id }
         { name: "gateway", value: $gateway }
         { name: "c__status", value: $c__status }
       ]
@@ -40,7 +40,7 @@ query search(
 
       payable_ids: property_array(name: "payable_ids")
       amount_cents: property_int(name: "amount_cents")
-      user_id: property(name: "user_id")
+      payer_id: property(name: "payer_id")
       currency: property(name: "currency")
       gateway: property(name: "gateway")
       c__status: property(name: "c__status")

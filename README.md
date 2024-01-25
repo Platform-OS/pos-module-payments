@@ -39,7 +39,7 @@ Defined events to which your application can listen:
 
 
         assign ids = '["1", "2"]' | parse_json
-        assign object = null | hash_merge: gateway: 'payments_example_gateway', payable_ids: ids, amount_cents: 1001, currency: 'USD', user_id: "1"
+        assign object = null | hash_merge: gateway: 'payments_example_gateway', payable_ids: ids, amount_cents: 1001, currency: 'USD', payer_id: "1"
         function object = 'modules/payments/commands/transactions/create', object: object
 
 2. Generate url and redirect user to this url
