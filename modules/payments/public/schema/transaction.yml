@@ -2,6 +2,8 @@ name: transaction
 properties:
   - name: payable_ids
     type: array
+  - name: payer_id
+    type: string
   - name: amount_cents
     type: integer
   - name: currency

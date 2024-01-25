@@ -2,6 +2,7 @@ mutation create_transaction(
   $payable_ids: [String]!
   $amount_cents: Int!
   $currency: String!
+  $payer_id: String
   $gateway: String!
   $c__status: String!
   $origin_domain: String
@@ -10,15 +11,16 @@ mutation create_transaction(
     record: {
       table: "modules/payments/transaction"
       properties: [
-        { name: "payable_ids" value_array: $payable_ids }
-        { name: "amount_cents" value_int: $amount_cents }
-        { name: "currency" value: $currency }
-        { name: "gateway" value: $gateway }
-        { name: "c__status" value: $c__status }
+        { name: "payable_ids", value_array: $payable_ids }
+        { name: "amount_cents", value_int: $amount_cents }
+        { name: "currency", value: $currency }
+        { name: "payer_id", value: $payer_id }
+        { name: "gateway", value: $gateway }
+        { name: "c__status", value: $c__status }
         { name: "origin_domain", value: $origin_domain }
       ]
     }
-  ){
+  ) {
     id
     type: table
     created_at
@@ -27,6 +29,7 @@ mutation create_transaction(
     payable_ids: property_array(name: "payable_ids")
     amount_cents: property_int(name: "amount_cents")
     currency: property(name: "currency")
+    payer_id: property(name: "payer_id")
     gateway: property(name: "gateway")
     c__status: property(name: "c__status")
   }
