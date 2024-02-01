@@ -4,7 +4,7 @@ Handle payments via various payment gateways. Payment process is handled by paym
 
 ## Installation
 
-        git clone git@github.com:Platform-OS/pos-module-payments.git modules/payments
+        pos-cli modules install payments
 
 ## Development
 
