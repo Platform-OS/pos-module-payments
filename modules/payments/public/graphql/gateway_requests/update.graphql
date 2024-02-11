@@ -8,18 +8,18 @@ mutation update_gateway_request(
     record: {
       table: "modules/payments/gateway_request"
       properties: [
-        { name: "response_body" value: $response_body }
-        { name: "response_status" value: $response_status }
+        { name: "response_body", value: $response_body }
+        { name: "response_status", value: $response_status }
       ]
     }
-  ){
+  ) {
     id
     created_at
     updated_at
-      external_id: property(name: "external_id")
-      request_data: property(name: "request_data")
-      response_body: property(name: "response_body")
-      response_status: property(name: "response_status")
-      api_call_template: property(name: "api_call_template")
-    }
+    external_id: property(name: "external_id")
+    request_data: property(name: "request_data")
+    response_body: property(name: "response_body")
+    response_status: property(name: "response_status")
+    api_call_template: property(name: "api_call_template")
+  }
 }
