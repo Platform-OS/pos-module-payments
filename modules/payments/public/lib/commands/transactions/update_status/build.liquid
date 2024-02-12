@@ -12,6 +12,6 @@
     assign status = 'app.statuses.transactions.failed'
   endcase
 
-  assign data = null | hash_merge: id: transaction.id, name: status
+  assign data = null | hash_merge: id: transaction.id, c__status: status
   return data
 %}

@@ -6,6 +6,8 @@ query search(
   $amount_cents: String
   $currency: String
   $payer_id: String
+  $gateway_transaction_id: String
+  $gateway_transaction_ids: [String!]
   $gateway: String
   $c__status: String
   $with_gateway_requests: Boolean = false
@@ -22,6 +24,11 @@ query search(
         { name: "amount_cents", value: $amount_cents }
         { name: "currency", value: $currency }
         { name: "payer_id", value: $payer_id }
+        {
+          name: "gateway_transaction_id"
+          value: $gateway_transaction_id
+          value_in: $gateway_transaction_ids
+        }
         { name: "gateway", value: $gateway }
         { name: "c__status", value: $c__status }
       ]
