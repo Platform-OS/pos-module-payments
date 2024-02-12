@@ -6,13 +6,22 @@
       default: 20
     - page: Int
       default: 1
-    - params: Hash
+    - payable_ids: [String!]
+    - id: String
+    - amount_cents: String
+    - payer_id: String
+    - currency: String
+    - gateway: String
+    - c__status: String
+    - gateway_transaction_id: String
+    - gateway_transaction_ids: String
+    - with_gateway_requests: Boolean = false
+    - with_statuses: Boolean = false
 {% endcomment %}
 {% liquid
-  assign page = page | default: params.page | to_positive_integer: 1
-  assign limit = limit | default: params.limit | default: 20
+  assign page = page | to_positive_integer: 1
+  assign limit = limit | default: 20
 
-  graphql r = 'modules/payments/transactions/search', args: params, limit: limit, page: page
-
+  graphql r = 'modules/payments/transactions/search', limit: limit, page: page, payable_ids: payable_ids, amount_cents: amount_cents, currency: currency, gateway: gateway, with_gateway_requests: with_gateway_requests, with_statuses: with_statuses, payer_id: payer_id, id: id, gateway_transaction_id: gateway_transaction_id, gateway_transaction_ids: gateway_transaction_ids, c__status: c__status
   return r.transactions
 %}
