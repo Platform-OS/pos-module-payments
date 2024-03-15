@@ -20,7 +20,7 @@
 {% endcomment %}
 {% liquid
   assign page = page | to_positive_integer: 1
-  assign limit = limit | default: 20
+  assign limit = limit | to_positive_integer: 20
 
   graphql r = 'modules/payments/transactions/search', limit: limit, page: page, payable_ids: payable_ids, amount_cents: amount_cents, currency: currency, gateway: gateway, with_gateway_requests: with_gateway_requests, with_statuses: with_statuses, payer_id: payer_id, id: id, gateway_transaction_id: gateway_transaction_id, gateway_transaction_ids: gateway_transaction_ids, c__status: c__status
   return r.transactions

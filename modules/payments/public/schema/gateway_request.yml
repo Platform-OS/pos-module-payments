@@ -1,6 +1,7 @@
 name: gateway_request
 properties:
   - name: name
+  - name: gateway_object_id
   - name: external_id
   - name: request_data
   - name: request_url

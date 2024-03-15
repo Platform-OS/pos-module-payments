@@ -3,6 +3,7 @@ mutation create_transaction(
   $amount_cents: Int!
   $currency: String!
   $payer_id: String
+  $gateway_transaction_id: String
   $gateway: String!
   $c__status: String!
   $origin_domain: String
@@ -14,6 +15,7 @@ mutation create_transaction(
         { name: "payable_ids", value_array: $payable_ids }
         { name: "amount_cents", value_int: $amount_cents }
         { name: "currency", value: $currency }
+        { name: "gateway_transaction_id", value: $gateway_transaction_id }
         { name: "payer_id", value: $payer_id }
         { name: "gateway", value: $gateway }
         { name: "c__status", value: $c__status }
@@ -29,6 +31,7 @@ mutation create_transaction(
     payable_ids: property_array(name: "payable_ids")
     amount_cents: property_int(name: "amount_cents")
     currency: property(name: "currency")
+    gateway_transaction_id: property(name: "gateway_transaction_id")
     payer_id: property(name: "payer_id")
     gateway: property(name: "gateway")
     c__status: property(name: "c__status")

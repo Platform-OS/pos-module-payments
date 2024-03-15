@@ -2,7 +2,8 @@
   {
     "id": {{ gateway_request.id | json }},
     "response_body": {{ object.response.body | json }},
-    "response_status": "{{ object.response.status }}"
+    "response_status": "{{ object.response.status }}",
+    "gateway_object_id": {{ object.response.body | parse_json | dig: 'id' | json }}
   }
 {% endparse_json %}
 
