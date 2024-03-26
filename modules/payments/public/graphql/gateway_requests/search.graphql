@@ -7,7 +7,6 @@ query search(
   $gateway_object_ids: [String!]
   $external_id: String
   $payload: String
-  $response: String
   $name: String
   $response_status: String
   $api_call_name: String
@@ -28,7 +27,6 @@ query search(
         { name: "external_id", value: $external_id }
         { name: "payload", value: $payload }
         { name: "name", value: $name }
-        { name: "response", value: $response }
         { name: "response_status", value: $response_status }
         { name: "api_call_name", value: $api_call_name }
       ]
@@ -50,7 +48,7 @@ query search(
       external_id: property(name: "external_id")
       payload: property(name: "payload")
       name: property(name: "name")
-      response: property(name: "response")
+      response_body: property(name: "response_body")
       response_status: property(name: "response_status")
       api_call_name: property(name: "api_call_name")
     }
