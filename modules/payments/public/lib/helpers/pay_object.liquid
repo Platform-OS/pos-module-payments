@@ -9,7 +9,7 @@
   function gateway_configured = gateway_is_configured_function
   if gateway_configured
     assign gateway_pay_object_function = 'modules/payments_' | append: transaction.gateway | append: '/helpers/pay_object'
-    function pay_object = gateway_pay_object_function, transaction: transaction, gateway_params: gateway_params
+    function pay_object = gateway_pay_object_function, transaction: transaction, gateway_params: gateway_params, payment_mode: payment_mode
   else
     unless context.environment == 'production'
       if use_fallback

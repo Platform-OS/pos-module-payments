@@ -1,5 +1,6 @@
 query search(
   $id: ID
+  $ids: [ID!]
   $limit: Int = 20
   $page: Int = 1
   $payable_ids: [String!]
@@ -17,7 +18,7 @@ query search(
     per_page: $limit
     page: $page
     filter: {
-      id: { value: $id }
+      id: { value: $id, value_in: $ids }
       table: { value: "modules/payments/transaction" }
       properties: [
         { name: "payable_ids", array_contains: $payable_ids }
