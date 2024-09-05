@@ -52,6 +52,7 @@ query search(
       currency: property(name: "currency")
       gateway: property(name: "gateway")
       c__status: property(name: "c__status")
+      origin_domain: property(name: "origin_domain")
       gateway_transaction_id: property(name: "gateway_transaction_id")
 
       gateway_requests: related_records(
