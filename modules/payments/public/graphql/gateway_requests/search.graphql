@@ -50,6 +50,8 @@ query search(
       name: property(name: "name")
       response_body: property(name: "response_body")
       response_status: property(name: "response_status")
+      request_data: property(name: "request_data")
+      request_url: property(name: "request_url")
       api_call_name: property(name: "api_call_name")
     }
   }
