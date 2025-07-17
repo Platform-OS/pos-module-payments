@@ -1,0 +1,14 @@
+{%- liquid
+  assign params = params | hash_merge: params
+
+  hash_assign params['page'] = params.page | to_positive_integer: 1
+  hash_assign params['limit'] = params.limit | to_positive_integer: 20
+
+  graphql g = "modules/payments_stripe/customers/search", args: params
+  if g.records == blank
+    log params, type: "QUERY ERROR - PARAMS"
+    log g, type: "QUERY ERROR"
+  endif
+
+  return g.records
+-%}

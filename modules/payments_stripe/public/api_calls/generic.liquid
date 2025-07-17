@@ -1,0 +1,30 @@
+---
+name: generic
+to: "{{ data.to }}"
+request_type: "{{ data.request_type }}"
+callback: >
+  {% liquid
+    assign response_data = response.body | to_hash
+    if response_data.error
+      assign type = 'ERROR stripe api callback to ' | append: data.to
+      log response_data.error, type: type
+    endif
+  %}
+request_headers: >
+  {%- function stripe_sk_key = 'modules/core/lib/queries/variable/find', name: 'stripe_sk_key' -%}
+  {
+    {%- if data.indempotency_key -%}
+      "Idempotency-Key": "{{ data.indempotency_key }}",
+    {%- endif -%}
+    {%- if data.payload -%}
+      "Content-Type": "application/x-www-form-urlencoded",
+    {%- endif -%}
+    "Authorization": "Bearer {{ stripe_sk_key }}"
+  }
+---
+{% liquid
+  if data.payload
+    assign encoded = data.payload | www_form_encode_rc
+    echo encoded
+  endif
+%}

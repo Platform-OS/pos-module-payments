@@ -1,0 +1,15 @@
+{% liquid
+  function object = 'modules/payments_stripe/commands/stripe_checkout/create', object: gateway_params, transaction: transaction
+  if object.valid
+    assign transaction_object = null | hash_merge: id: transaction.id, gateway_transaction_id: object.id
+    function transaction = 'modules/payments/commands/transactions/update_gateway_transaction_id', object: transaction_object
+    if transaction.valid
+    else
+      log object, type: 'ERROR: modules/payments_stripe pay_object'
+    endif
+  else
+    log object, type: 'ERROR: modules/payments_stripe pay_object'
+  endif
+
+  return object
+%}
