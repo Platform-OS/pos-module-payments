@@ -1,0 +1,38 @@
+
+<main class="app-user-page">
+<nav class="app-user-navigation">
+    <a href="/">Home</a>
+    <a href="/payments">Payments</a>
+</nav>
+<section class="app-user-info pos-card pos-card-highlighted">
+    <header>
+        <h1 class="pos-heading-3">Welcome {{ current_profile.name }}</h1>
+        <form action="/sessions" method="post">
+            <input type="hidden" name="authenticity_token" value="{{ context.authenticity_token }}">
+            <input type="hidden" name="_method" value="delete">
+            <button type="submit" class="pos-button">
+                {{ 'modules/user/users.logout' | t }}
+            </button>
+        </form>
+    </header>
+
+    <section class="app-payment">
+        <h1 class="pos-heading-2">Payments</h1>
+        
+        {% if transactions.results.size == 0 %}
+        <p class="app-payment-empty">There are no transactions to show</p>
+        {% endif %}
+
+        <section class="app-payment-items">
+        {% for transaction in transactions.results %}
+            <article class="app-payment-item">
+                <div>ID: {{ transaction.id }}</div>
+                <div>Paid: {{ transaction.amount_cents | pricify_cents }}</div>
+                <div>Currency: {{ transaction.currency }}</div>
+                <div>Status: {{ transaction.c__status | t }}</div>
+            </article>
+        {% endfor %}
+    </section>
+    </section>
+</section>
+</main>

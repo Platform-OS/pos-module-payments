@@ -1,0 +1,6 @@
+{
+  "modules": {
+    "payments_stripe": "0.2.9",
+    "user": "5.0.4"
+  }
+}

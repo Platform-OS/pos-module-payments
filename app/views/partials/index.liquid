@@ -1,0 +1,58 @@
+
+{% if current_profile.user != null %}
+<main class="app-user-page">
+    <nav class="app-user-navigation">
+        <a href="/">Home</a>
+        <a href="/payments">Payments</a>
+    </nav>
+    <section class="app-user-info pos-card pos-card-highlighted">
+        <header>
+            <h1 class="pos-heading-3">Welcome {{ current_profile.name }}</h1>
+            <form action="/sessions" method="post">
+                <input type="hidden" name="authenticity_token" value="{{ context.authenticity_token }}">
+                <input type="hidden" name="_method" value="delete">
+                <button type="submit" class="pos-button">
+                    {{ 'modules/user/users.logout' | t }}
+                </button>
+            </form>
+        </header>
+
+        <section class="app-payments">
+          <form action="pay" method="post">
+            <div class="product">
+              <img src="{{ 'images/pos-sign.svg' | asset_url }}" alt="Payment" />
+              <div class="description">
+                <h3>Test Payment</h3>
+                <h5>$20.00</h5>
+              </div>
+              <input type="number" min="1" value="1" name="line_items[][quantity]" />
+              <input type="hidden" name="line_items[][price_data][product_data][name]" value="Test Payment" />
+              <input type="hidden" name="line_items[][price_data][unit_amount]" value="2000" />
+              <input type="hidden" name="line_items[][price_data][currency]" value="USD" />
+              <input type="hidden" name="authenticity_token" value="{{ context.authenticity_token }}">
+              <input type="hidden" name="_method" value="post">
+            </div>
+            <button type="submit" class="pos-button pos-button-primary">Pay now</button>
+          </form>
+        </section>
+    </section>
+  </main>
+{% else %}
+  <main class="app-user-intro">
+    <section class="app-user-intro-content">
+      <h2 class="pos-heading-2">
+        <img src="{{ 'images/pos-sign.svg' | asset_url }}" width="28" height="25" loading="eager" alt="">
+        Example platformOS Stripe Payments Application
+      </h2>
+      <nav>
+        <ul class="app-user-intro-nav">
+          <li><a href="/users/new">Register</a></li>
+          <li><a href="/sessions/new">Log in</a></li>
+        </ul>
+      </nav>
+    </section>
+    <footer class="app-user-intro-footer">
+      Powered by <a href="https://platformos.com">platformOS</a>
+    </footer>
+  </main>
+{% endif %}

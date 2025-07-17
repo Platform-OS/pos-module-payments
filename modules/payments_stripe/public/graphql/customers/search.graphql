@@ -1,0 +1,36 @@
+query (
+  $email: String
+  $name: String
+  $customer_id: String
+  $reference_id: String
+) {
+  records(
+    per_page: 1
+    filter: {
+      table: { value: "modules/payments_stripe/customer" }
+      properties: [
+        { name: "email", value: $email }
+        { name: "name", contains: $name }
+        { name: "customer_id", value: $customer_id }
+        { name: "reference_id", value: $reference_id }
+      ]
+    }
+    sort: { created_at: { order: DESC } }
+  ) {
+    total_entries
+    total_pages
+    has_previous_page
+    has_next_page
+    results {
+      table
+      created_at
+      updated_at
+
+      id
+      customer_id: property(name: "customer_id")
+      reference_id: property(name: "reference_id")
+      email: property(name: "email")
+      name: property(name: "name")
+    }
+  }
+}
