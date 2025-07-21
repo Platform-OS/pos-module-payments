@@ -237,16 +237,16 @@ p + p {
 
 /* payments section
 ============================================================================ */
-.app-payments img {
+.app-orders img {
   width: 50px;
   height: 50px;
 }
 
-.app-payments .product { 
+.app-orders .product { 
   margin: var(--pos-gap-section-elements) 0;
 }
 
-.app-payment-item {
+.app-order-item {
   border: 1px solid gainsboro;
   display: inline-block;
   vertical-align: top;
@@ -255,7 +255,7 @@ p + p {
   padding: var(--pos-padding-card);
 }
 
-.app-payment-items {
+.app-order-items {
   display: flex;
   gap: 10px;
   flex-direction: row;
@@ -263,6 +263,6 @@ p + p {
   flex-wrap: wrap;
 }
 
-.app-payment-empty {
+.app-order-empty {
   margin: 1rem 0;
 }

@@ -3,7 +3,7 @@
 <main class="app-user-page">
     <nav class="app-user-navigation">
         <a href="/">Home</a>
-        <a href="/payments">Payments</a>
+        <a href="/orders">Orders</a>
     </nav>
     <section class="app-user-info pos-card pos-card-highlighted">
         <header>
@@ -17,18 +17,41 @@
             </form>
         </header>
 
-        <section class="app-payments">
+        <section class="app-orders">
           <form action="pay" method="post">
             <div class="product">
               <img src="{{ 'images/pos-sign.svg' | asset_url }}" alt="Payment" />
               <div class="description">
                 <h3>Test Payment</h3>
-                <h5>$20.00</h5>
               </div>
-              <input type="number" min="1" value="1" name="line_items[][quantity]" />
-              <input type="hidden" name="line_items[][price_data][product_data][name]" value="Test Payment" />
-              <input type="hidden" name="line_items[][price_data][unit_amount]" value="2000" />
-              <input type="hidden" name="line_items[][price_data][currency]" value="USD" />
+              <fieldset>
+                <div>
+                  <label for="product_name">Product name</label>
+                </div>
+                <input type="text" id="product_name" name="line_items[][price_data][product_data][name]" value="Test Payment" />
+              </fieldset>
+              <fieldset>
+                <div>
+                  <label for="quantity">Quantity</label>
+                </div>
+                <input type="number" id="quantity" min="1" value="1" name="line_items[][quantity]" />
+              </fieldset>
+              <fieldset>
+                <div>
+                  <label for="price">Price</label>
+                </div>
+                <input type="number" id="price" min="10" value="10" name="line_items[][price_data][unit_amount]" />
+              </fieldset>
+              <fieldset>
+                <div>
+                  <label for="price">Currency</label>
+                </div>
+                <select id="price" name="currency">
+                  <option value="EUR" selected>EUR</option>
+                  <option value="USD">USD</option>
+                  <option value="PLN">PLN</option>
+                </select>
+              </fieldset>
               <input type="hidden" name="authenticity_token" value="{{ context.authenticity_token }}">
               <input type="hidden" name="_method" value="post">
             </div>

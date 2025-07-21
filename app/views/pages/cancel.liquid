@@ -14,5 +14,5 @@ if transaction == null
     redirect_to "/"
 endif
 
-render 'cancel', transaction: transaction
+render 'cancel', current_profile: current_profile, transaction: transaction
 %}

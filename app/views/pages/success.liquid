@@ -14,5 +14,5 @@ if transaction == null or transaction.payer_id != current_profile.id
     redirect_to "/"
 endif
 
-render 'success', transaction: transaction
+render 'success', current_profile: current_profile, transaction: transaction
 %}

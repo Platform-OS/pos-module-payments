@@ -1,9 +1,0 @@
-{% liquid
-function current_profile = 'modules/user/helpers/current_profile'
-if current_profile.user == null
-    redirect_to "/"
-endif
-
-function transactions = 'modules/payments/queries/transactions/search', payer_id: current_profile.id, with_gateway_requests: true, with_statuses: true
-render 'payments', current_profile: current_profile, transactions: transactions
-%}
