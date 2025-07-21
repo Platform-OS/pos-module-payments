@@ -19,7 +19,6 @@ method: post
         assign line_items = line_items | array_add: item_data
     endfor
 
-    log line_items, type:"D"
     assign object = null | hash_merge: profile_id: current_profile.id, amount: total, currency: params.currency
     function order = 'commands/orders/create', object: object
 
@@ -35,7 +34,6 @@ method: post
 
         redirect_to url, status: 303
     else
-        log order, type:"D"
         redirect_to '/'
     endif
 %}
