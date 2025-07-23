@@ -23,5 +23,6 @@ mutation create_transaction(
     amount: property_int(name: "amount")
     currency: property(name: "currency")
     profile_id: property(name: "profile_id")
+    idempotency_key: property(name: "idempotency_key")
   }
 }

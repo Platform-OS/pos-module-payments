@@ -5,7 +5,7 @@
   assign gateway_request = null | hash_merge: external_id: external_id, name: name, request_url: url, request_data: request_data, api_call_template: template
   assign api_call = null | hash_merge: template: template, data: object
 
-  assign data = null | hash_merge: api_call: api_call, gateway_request: gateway_request, idempotency_key: idempotency_key
+  assign data = null | hash_merge: api_call: api_call, gateway_request: gateway_request
 
   return data
 %}

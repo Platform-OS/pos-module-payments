@@ -15,5 +15,5 @@
   assign limit = limit | to_positive_integer: 20
 
   graphql r = 'orders/search', limit: limit, page: page, profile_id: profile_id, amount: amount, currency: currency
-  return r.orders
+  return r.records
 %}

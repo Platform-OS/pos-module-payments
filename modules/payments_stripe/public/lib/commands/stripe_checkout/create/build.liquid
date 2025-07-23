@@ -2,7 +2,7 @@
   assign payload = null | hash_merge: client_reference_id: transaction.id, mode: "payment"
   assign payload = object | hash_merge: payload
 
-  assign data = null | hash_merge: payload: payload, request_type: 'POST', to: 'https://api.stripe.com/v1/checkout/sessions'
+  assign data = null | hash_merge: payload: payload, request_type: 'POST', to: 'https://api.stripe.com/v1/checkout/sessions', idempotency_key: idempotency_key
 
   return data
 %}
