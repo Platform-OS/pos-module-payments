@@ -12,14 +12,20 @@ method: post
         redirect_to "/orders"
         return
     endif
-
     assign transaction = transaction.results[0]
     assign request = transaction.gateway_requests[0].request_data | parse_json
+
+    function order = 'queries/orders/find', id: transaction.payable_ids[0]
+
+    if request.payload.line_items == null
+        redirect_to "/orders"
+        return
+    endif
 
     assign success_url = 'https://' | append: context.location.host | append: '/success/' | append: params.transaction
     assign failed_url = 'https://' | append: context.location.host | append: '/cancel/' | append: params.transaction
     assign stripe_params = null | hash_merge: success_url: success_url, cancel_url: failed_url, line_items: request.payload.line_items
-    function url = 'modules/payments/helpers/pay_url', transaction: transaction, gateway_params: stripe_params
+    function url = 'modules/payments/helpers/pay_url', transaction: transaction, gateway_params: stripe_params, idempotency_key: order.idempotency_key
 
     redirect_to url, status: 303
 %}

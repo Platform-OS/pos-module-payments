@@ -2,6 +2,7 @@ mutation create_transaction(
   $amount: Int!
   $currency: String!
   $profile_id: String
+  $idempotency_key: String
 ) {
   record: record_create(
     record: {
@@ -10,6 +11,7 @@ mutation create_transaction(
         { name: "amount", value_int: $amount }
         { name: "currency", value: $currency }
         { name: "profile_id", value: $profile_id }
+        { name: "idempotency_key", value: $idempotency_key}
       ]
     }
   ) {

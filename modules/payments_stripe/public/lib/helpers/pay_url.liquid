@@ -1,5 +1,5 @@
 {% liquid
-  function object = 'modules/payments_stripe/commands/stripe_checkout/create', object: gateway_params, transaction: transaction
+  function object = 'modules/payments_stripe/commands/stripe_checkout/create', object: gateway_params, transaction: transaction, idempotency_key: idempotency_key
   if object.valid
     return object.url
   else
