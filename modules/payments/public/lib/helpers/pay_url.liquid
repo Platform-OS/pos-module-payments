@@ -1,5 +1,5 @@
 {% liquid
-  # Params:
+  # Params
   #   transaction
   #   params
 
@@ -9,7 +9,7 @@
   function gateway_configured = gateway_is_configured_function
   if gateway_configured
     assign gateway_pay_url_function = 'modules/payments_' | append: transaction.gateway | append: '/helpers/pay_url'
-    function url = gateway_pay_url_function, transaction: transaction, gateway_params: gateway_params
+    function url = gateway_pay_url_function, transaction: transaction, gateway_params: gateway_params, idempotency_key: idempotency_key
   else
     unless context.environment == 'production'
       if use_fallback
