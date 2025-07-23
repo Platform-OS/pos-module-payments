@@ -2,5 +2,5 @@ en:
   app:
     statuses:
       transactions:
-        succeeded: 'Completed'
-        new: 'Pending'
+        succeeded: 'Paid'
+        new: 'Unpaid'

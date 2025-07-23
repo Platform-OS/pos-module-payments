@@ -28,9 +28,19 @@
             <article class="app-order-item">
                 <div>ID: {{ transaction.id }}</div>
                 <div>Status: {{ transaction.c__status | t }}</div>
+                    <section class="app-order-finalize">
+                        {% if transaction.c__status == 'app.statuses.transactions.new' %}
+                        <form action="/finalize" method="post">
+                            <input type="hidden" name="authenticity_token" value="{{ context.authenticity_token }}">
+                            <input type="hidden" name="_method" value="post">
+                            <input type="hidden" name="order" value="{{ order_id }}">
+                            <input type="hidden" name="transaction" value="{{ transaction.id }}">
+                            <button type="submit" class="pos-button pos-button-primary">Pay now</button>
+                        </form>
+                        {% endif %}
+                    </section>
             </article>
         {% endfor %}
-    </section>
     </section>
 </section>
 </main>

@@ -266,3 +266,7 @@ p + p {
 .app-order-empty {
   margin: 1rem 0;
 }
+
+.app-order-finalize {
+  margin: 1rem 0 0 0;
+}
