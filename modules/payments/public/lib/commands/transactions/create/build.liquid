@@ -1,6 +1,18 @@
-{% liquid
-  assign origin_domain = context.location.host
-  assign data = null | hash_merge: payable_ids: object.payable_ids, amount_cents: object.amount_cents, currency: object.currency, gateway: object.gateway, c__status: 'app.statuses.transactions.new', origin_domain: origin_domain, payer_id: object.payer_id, gateway_transaction_id: object.gateway_transaction_id
+{% assign origin_domain = context.location.host %}
 
-  return data
-%}
+{% parse_json object %}
+  {
+    "payable_ids": {{ object.payable_ids | json }},
+    "amount_cents": {{ object.amount_cents | json }},
+    "currency": {{ object.currency | json }},
+    "gateway": {{ object.gateway | json }},
+    "c__status": "app.statuses.transactions.new",
+    "origin_domain": {{ origin_domain | json }},
+    "payer_id": {{ object.payer_id | json }},
+    "gateway_transaction_id": {{ object.gateway_transaction_id | json }},
+    "stripe_account_name": {{ object.stripe_account_name | json }}
+  }
+{% endparse_json %}
+
+ {% return object %}
+

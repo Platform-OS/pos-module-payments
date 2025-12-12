@@ -8,3 +8,4 @@ properties:
   - name: response_body
   - name: response_status
   - name: api_call_template
+  - name: stripe_account_name

@@ -11,6 +11,7 @@ query search(
   $gateway_transaction_ids: [String!]
   $gateway: String
   $c__status: String
+  $stripe_account_name: String
   $with_gateway_requests: Boolean = false
   $with_statuses: Boolean = false
 ) {
@@ -32,6 +33,7 @@ query search(
         }
         { name: "gateway", value: $gateway }
         { name: "c__status", value: $c__status }
+        { name: "stripe_account_name", value: $stripe_account_name }
       ]
     }
     sort: [{ created_at: { order: DESC } }]
@@ -54,6 +56,7 @@ query search(
       c__status: property(name: "c__status")
       origin_domain: property(name: "origin_domain")
       gateway_transaction_id: property(name: "gateway_transaction_id")
+      stripe_account_name: property(name: "stripe_account_name")
 
       gateway_requests: related_records(
         join_on_property: "id"
