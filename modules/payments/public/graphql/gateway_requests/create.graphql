@@ -5,6 +5,7 @@ mutation create_gateway_request(
   $request_data: String!
   $name: String!
   $api_call_template: String
+  $stripe_account_name: String
 ) {
   record: record_create(
     record: {
@@ -16,6 +17,7 @@ mutation create_gateway_request(
         { name: "request_data", value: $request_data }
         { name: "name", value: $name }
         { name: "api_call_template", value: $api_call_template }
+        { name: "stripe_account_name", value: $stripe_account_name }
       ]
     }
   ) {
@@ -27,5 +29,6 @@ mutation create_gateway_request(
     request_data: property(name: "request_data")
     name: property(name: "name")
     api_call_template: property(name: "api_call_template")
+    stripe_account_name: property(name: "stripe_account_name")
   }
 }

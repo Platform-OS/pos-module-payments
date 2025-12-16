@@ -25,5 +25,6 @@ mutation update_gateway_request(
     response_body: property(name: "response_body")
     response_status: property(name: "response_status")
     api_call_template: property(name: "api_call_template")
+    stripe_account_name: property(name: "stripe_account_name")
   }
 }

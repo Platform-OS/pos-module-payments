@@ -18,3 +18,4 @@ properties:
 
   # id used by gateway provided api
   - name: gateway_transaction_id
+  - name: stripe_account_name

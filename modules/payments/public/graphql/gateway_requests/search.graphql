@@ -10,6 +10,7 @@ query search(
   $name: String
   $response_status: String
   $api_call_name: String
+  $stripe_account_name: String
 ) {
   gateway_requests: records(
     per_page: $limit
@@ -29,6 +30,7 @@ query search(
         { name: "name", value: $name }
         { name: "response_status", value: $response_status }
         { name: "api_call_name", value: $api_call_name }
+        { name: "stripe_account_name", value: $stripe_account_name }
       ]
     }
     sort: [{ created_at: { order: DESC } }]
@@ -53,6 +55,7 @@ query search(
       request_data: property(name: "request_data")
       request_url: property(name: "request_url")
       api_call_name: property(name: "api_call_name")
+      stripe_account_name: property(name: "stripe_account_name")
     }
   }
 }
